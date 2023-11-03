@@ -7,13 +7,15 @@ function App() {
   const [to, setTo] = useState("ar");
   const [word, setWord] = useState("");
   const [translation, setTranslation] = useState("");
+  const [image, setImage] = useState("");
 
   // onsubmit function that calls our API to get the translation
   async function handleTranslate(event) {
     event.preventDefault();
-    const API = `http://localhost:8080/translate?word=${word}&from=${from}&to=${to}`;
+    const API = `https://translatim-ev0b.onrender.com/translate?word=${word}&from=${from}&to=${to}`;
     const res = await axios.get(API);
     setTranslation(res.data.translation);
+    setImage(res.data.image);
   }
 
   return (
@@ -45,6 +47,7 @@ function App() {
         </div>
         <button>Submit</button>
       </form>
+      <img src={image} />
       {/* show our translation */}
       {/* STRETCH: show a gif from the GIPHY API that matches the translation */}
     </>
